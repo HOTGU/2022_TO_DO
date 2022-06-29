@@ -53,3 +53,4 @@ const toDoInit = () => {
 };
 
 toDoInit();
+console.log("test ");
