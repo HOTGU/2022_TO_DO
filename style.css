@@ -1,15 +1,14 @@
 .container {
     width: 100%;
-    height: 100vh;
-    color: black;
+    height: 100%;
+    border: 1px solid #8c7ae6;
+    box-sizing: border-box;
     font-weight: 900;
-    max-width: 400px;
-    margin: 0 auto;
-    background-color: #9c88ff;
+    background-image: linear-gradient(145deg, #e1b12c, #8c7ae6);
 }
 
 #date {
-    margin: 50px 0;
+    margin: 30px 0;
     font-size: 32px;
     width: 100%;
     text-align: center;
@@ -20,17 +19,124 @@
     align-items: center;
     justify-content: center;
 }
+.todo__container {
+    display: flex;
+    justify-content: space-around;
+}
+.paper {
+    background-color: white;
+    padding: 0 20px;
+    width: auto;
+    height: 100%;
+    max-width: 500px;
+    min-width: 300px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.todo__category {
+    width: 100%;
+    font-size: 24px;
+    margin: 20px 0;
+    text-align: center;
+}
 
 .input {
     flex: 8;
-    border: 1px solid #8c7ae6;
+    max-width: 400px;
     padding: 10px 15px;
+    border-radius: 5px;
     font-size: 18px;
+    margin-right: 3px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .btn {
+    max-width: 100px;
     flex: 2;
     background-color: white;
-    border: 1px solid #8c7ae6;
     font-size: 16px;
+    border-radius: 5px;
     padding: 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.dot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 20px;
+}
+.dot-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dot {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.before-dot {
+    background-color: #e74c3c;
+}
+.success-dot {
+    background-color: #3498db;
+}
+.todo__paper {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 600px;
+}
+
+.todo {
+    width: fit-content;
+    padding: 10px 15px;
+    display: inline;
+    background-color: #f1f2f6;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.todo__btn {
+    padding: 5px;
+    margin-left: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.before-todo__btn {
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 10px;
+    background-color: #e74c3c;
+    color: white;
+}
+.success-todo__btn {
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 10px;
+    background-color: #3498db;
+    color: white;
+}
+
+#todo-text {
+    font-size: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8c7ae6;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9c88ff;
 }

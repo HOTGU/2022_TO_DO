@@ -86,7 +86,6 @@ video {
     font: inherit;
     vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
 article,
 aside,
 details,
@@ -102,7 +101,9 @@ section {
 }
 body {
     line-height: 1;
+    min-height: 100vh;
 }
+
 ol,
 ul {
     list-style: none;

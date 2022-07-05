@@ -13,6 +13,11 @@ const getDate = () => {
     const day = newDate.getUTCDate();
 
     dateDiv.innerHTML = `😀 ${year}년 ${month}월 ${day}일 😀`;
+
+    return {
+        month,
+        day,
+    };
 };
 
 getDate();
@@ -29,8 +34,12 @@ const handleDelete = (e) => {
 const handleSuccess = (e) => {
     const parent = e.target.parentElement;
     const parentId = parent.id;
-    eraceTodo(parent);
-    successLocalstorageTodo(parentId);
+    const wrapper = parent.parentElement;
+    const wrapperId = wrapper.id;
+    if (wrapperId === "todo-list") {
+        eraceTodo(parent);
+        successLocalstorageTodo(parentId);
+    }
 };
 
 const eraceTodo = (target) => {
@@ -45,18 +54,33 @@ const eraceTodo = (target) => {
 
 const paintTodo = (todoObj) => {
     const todoWrapper = document.createElement("div");
+    todoWrapper.classList.add("todo");
     todoWrapper.id = todoObj.id;
     const text = document.createElement("span");
+    text.id = "todo-text";
     text.innerHTML = todoObj.todo;
     const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = "❌삭제";
+    deleteBtn.classList.add("todo__btn");
+    deleteBtn.innerHTML = "❌";
     deleteBtn.addEventListener("click", handleDelete);
     const successBtn = document.createElement("button");
+    successBtn.classList.add("todo__btn");
     successBtn.addEventListener("click", handleSuccess);
-    successBtn.innerHTML = "✅완성";
+    const createTimeBtn = document.createElement("button");
+    createTimeBtn.innerHTML = `${todoObj.createMonth}/${todoObj.createDay}`;
+    createTimeBtn.classList.add("before-todo__btn");
+    successBtn.innerHTML = "✅";
     todoWrapper.append(text);
     todoWrapper.append(deleteBtn);
     todoWrapper.append(successBtn);
+    todoWrapper.append(createTimeBtn);
+    console.log(todoObj);
+    if (todoObj.successMonth && todoObj.successDay) {
+        const successTimeBtn = document.createElement("button");
+        successTimeBtn.classList.add("success-todo__btn");
+        successTimeBtn.innerHTML = `${todoObj.successMonth}/${todoObj.successDay}`;
+        todoWrapper.append(successTimeBtn);
+    }
     if (todoObj.isSuccess) {
         successList.appendChild(todoWrapper);
     }
@@ -78,8 +102,14 @@ const deleteLocalstorageTodo = (id) => {
 };
 const successLocalstorageTodo = (id) => {
     const filtered = todosArr.map((todoObj) => {
+        const { month, day } = getDate();
         if (todoObj.id === id) {
-            todoObj = { ...todoObj, isSuccess: true };
+            todoObj = {
+                ...todoObj,
+                isSuccess: true,
+                successMonth: month,
+                successDay: day,
+            };
             paintTodo(todoObj);
         }
         return todoObj;
@@ -90,10 +120,15 @@ const successLocalstorageTodo = (id) => {
 
 const handleSubmit = (e) => {
     e.preventDefault();
+    const { month, day } = getDate();
     const todoObj = {
         id: Date.now().toString(),
         todo: input.value,
         isSuccess: false,
+        createMonth: month,
+        createDay: day,
+        successMonth: null,
+        successDay: null,
     };
     paintTodo(todoObj);
     saveLocalstorageTodo(todoObj);
